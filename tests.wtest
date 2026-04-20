@@ -1,0 +1,17 @@
+import artefactos.*
+import capos.*
+import castillos.*
+describe "rolando recoleta artefactos" {
+  test "rolando recolecta artefacto (positivo)" {
+    rolando.capacidadMochila(2) // arrange/setup
+    rolando.recogerArtefacto(espadaDelDestino) //act/exercise
+    assert.equals(1, rolando.capacidadMochila()) // asserts
+    assert.equals(#{espadaDelDestino}, rolando.artefactosEnMochila())
+//assert.that(rolando.artefactosEnMochila().contains(espadaDelDestino))
+  }
+  test "rolando no recolecta artefacto (negativo)" {
+    rolando.capacidadMochila(0)
+    assert.throwsException({ rolando.recogerArtefacto(espadaDelDestino) })
+//  assert.equals(0, rolando.capacidadMochila()) 
+  }
+  }

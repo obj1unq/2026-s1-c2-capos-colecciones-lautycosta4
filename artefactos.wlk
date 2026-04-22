@@ -5,23 +5,15 @@ la misma cantidad que el poder base del personaje,
 luego sólo el 50%. */
 object espadaDelDestino{
     var usado= false
-    var poder=  0
+  
+    method usar(){
+       usado= true  }
 
-    method usada() {
-      usado=false
-    }
-
-    method sinUsar() {
-      usado=true
-    }
-
-    method usar(personaje){
-        if(usado){
-            poder=personaje.valorBasePelea() 
-            self.usada()
-        }else poder=personaje.valorBasePelea()/2
-    }
-    method poder(){return poder} 
+    method poder(personaje){return 
+        if(!usado){
+            personaje.valorBasePelea()             
+        }else personaje.valorBasePelea()/2
+        } 
 
 }
 
@@ -30,15 +22,19 @@ tiene un poder base mayor a 6, le suma también un punto
 por cada batalla en la que se haya usado el collar.*/
 object collarDivino{
    var cantidadBatallasCollar=0
-    const poder= 0 
-    method usar(personaje){
+    const poder= 3 
+    
+method cantidadBatallasCollar()
+{return cantidadBatallasCollar}
+
+    method usar(){      
+        cantidadBatallasCollar=+1 }
+
+    method poder(personaje){return 
         if (personaje.valorBasePelea()<=6){
-           poder==3     
+           poder    
         }else 
-        {poder==3+cantidadBatallasCollar}
-        cantidadBatallasCollar=+1 
-    }
-    method poder(){return poder} 
+        {poder+cantidadBatallasCollar}} 
 }
 
 /*
@@ -47,12 +43,14 @@ siempre, el acero valyrio no se gasta con las batallas.*/
 object armaduraDeAceroValyrio{
     
     const poder= 6  
+
     method usar(){
-        poder 
-    }    
-    method poder(){return poder} 
+        poder     }
+
+    method poder(){return poder}
+
+    method poder(personaje){return poder} 
 }
 object libroDeHechizos{
 
 } 
-

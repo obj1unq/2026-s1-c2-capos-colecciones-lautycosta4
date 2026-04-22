@@ -51,15 +51,18 @@ method puedeLevantar(){
 }
 }
 
-
-
- const usarArtefacto = 
-  {personaje, artefacto => artefacto.usar(personaje)}
-
-  method batalla (personaje, artefacto){
-    usarArtefacto.apply(personaje, artefacto)
-    poderPelea=+ artefacto.poder()
+ 
+ method batalla (){
+    mochila.forEach({artefacto=>artefacto.usar()})
 }
 
+    method poderPelea(){return
+    valorBasePelea + 
+    mochila.sum({artefacto=>artefacto.poder(self)})
+    }
 
+method artefactoMasPoderosoDelCastilloActual(){
+        return castilloActual.artefactoMasPoderoso()
 }
+}
+

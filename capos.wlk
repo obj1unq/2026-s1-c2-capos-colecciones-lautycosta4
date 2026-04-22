@@ -10,7 +10,7 @@ var capacidadMochila= 2
 
 var valorBasePelea= 5
 
-var poderPelea= valorBasePelea + poder
+
 
 
 
@@ -23,10 +23,10 @@ method artefactosEnMochila(){  return mochila}
 method capacidadMochila(_capacidadMochila){capacidadMochila=_capacidadMochila}
 method capacidadMochila(){return capacidadMochila}
 
-method artefactosEnCastillo(){ return castilloActual}
+method artefactosEnCastillo(){ return castilloActual.inventario()}
 
 method artefactosEncontrados(){
-    return mochila + castilloActual.artefactos()
+    return mochila + castilloActual.inventario()
 }
 
 method hayArtefacto(artefacto) {
@@ -54,15 +54,20 @@ method puedeLevantar(){
  
  method batalla (){
     mochila.forEach({artefacto=>artefacto.usar()})
-}
+   self.actualizarBase()
+  }
 
+    method actualizarBase() {
+      valorBasePelea=valorBasePelea+1
+    }
+    
     method poderPelea(){return
     valorBasePelea + 
     mochila.sum({artefacto=>artefacto.poder(self)})
     }
 
 method artefactoMasPoderosoDelCastilloActual(){
-        return castilloActual.artefactoMasPoderoso()
+        return castilloActual.artefactoMasPoderoso(self)
 }
 }
 

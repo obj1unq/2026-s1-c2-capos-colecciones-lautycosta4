@@ -28,7 +28,7 @@ method cantidadBatallasCollar()
 {return cantidadBatallasCollar}
 
     method usar(){      
-        cantidadBatallasCollar=+1 }
+        cantidadBatallasCollar=cantidadBatallasCollar+1 }
 
     method poder(personaje){return 
         if (personaje.valorBasePelea()<=6){
@@ -51,6 +51,38 @@ object armaduraDeAceroValyrio{
 
     method poder(personaje){return poder} 
 }
-object libroDeHechizos{
 
+
+object libroDeHechizos{
+    const hechizos=[]
+    
+    method usar(){
+        if (not hechizos.isEmpty()){
+         hechizos.remove(hechizos.first())
+        } 
+    }
+    method guardarHechizo(hechizo) {
+      hechizos.add(hechizo)
+    }
+    method poder(personaje){ return
+    if (not hechizos.isEmpty()){
+        hechizos.first().poder(personaje)
+    }else 0
+    }
 } 
+object bendicion {
+        method poder(personaje){
+            return 4
+        }
+}
+object invisibilidad {
+    method poder(personaje){
+        return personaje.valorBasePelea()
+    }
+}
+object invocacion {
+    method poder(personaje){
+        return 
+        personaje.artefactoMasPoderosoDelCastilloActual().poder(personaje)
+    }
+}

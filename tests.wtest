@@ -36,4 +36,23 @@ describe "rolando recoleta artefactos" {
       rolando.valorBasePelea(8)
       assert.equals(8 + 4 + 6 + 6 , rolando.poderPelea())
           }
+  
+ test "batalla con libro de hechizos" {
+      rolando.capacidadMochila(3)
+      rolando.recogerArtefacto(espadaDelDestino)
+      rolando.recogerArtefacto(armaduraDeAceroValyrio)
+      rolando.recogerArtefacto(collarDivino)
+      rolando.irACastillo()
+      rolando.recogerArtefacto(libroDeHechizos)
+      libroDeHechizos.guardarHechizo(bendicion)
+      libroDeHechizos.guardarHechizo(invisibilidad)
+      libroDeHechizos.guardarHechizo(invocacion)      
+      assert.equals(4, libroDeHechizos.poder(rolando))
+      rolando.batalla()
+      assert.equals(6, libroDeHechizos.poder(rolando))
+      rolando.batalla()
+      assert.equals(7, libroDeHechizos.poder(rolando))
+      rolando.batalla()
+      assert.equals(0, libroDeHechizos.poder(rolando))      
+    }
   }

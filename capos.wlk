@@ -72,9 +72,9 @@ a los cuales puede vencer.*/
     const moradasConquistables=[]
     
     const enemigosAVencer=[]
+    
 
-
-    method puedeVencer(enemigo){
+    method vencerEnemigo(enemigo){
         if (self.poderPelea()>enemigo.poderPelea()){
             enemigosAVencer.add(enemigo)
             moradasConquistables.add(enemigo.castilloActual())
@@ -85,6 +85,24 @@ a los cuales puede vencer.*/
 
     method moradasConquistables(){return moradasConquistables}
 
+//2.4
+/*
+Se considera que Rolando es poderoso en la tierra de Erethia si está en condiciones de 
+vencer a todos los enemigos.
+*/
+    const enemigos=[]
+
+    method agregarEnemigo(_enemigo){
+        enemigos.add(_enemigo)
+    }
+    method puedeVencer(enemigo){
+        return self.poderPelea()>enemigo.poderPelea()
+    }
+
+    method esPoderoso(){
+        enemigos.size()>0 &&
+        enemigos.all({enemigo=> self.puedeVencer(enemigo)})
+    }
 
 }
 

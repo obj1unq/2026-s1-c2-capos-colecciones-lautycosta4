@@ -56,3 +56,25 @@ describe "rolando recoleta artefactos" {
       assert.equals(0, libroDeHechizos.poder(rolando))      
     }
   }
+
+  /*
+  Suponiendo que Rolando tiene 5 de base y capacidad de 3 artefactos. Entre sus artefactos 
+  se encuentran la *espada* (que le aporta 5), la *armadura* (aporta 6) y el *collar* (aporta 3). 
+  Su poder de batalla es 19, por lo tanto, puede vencer a Archibaldo y a Astra. 
+  Las moradas conquistables son el palacio de mármol y la torre de marfil.
+  */
+
+  describe "enemigos a vencer" {
+    test "rolando puede vencer a astra y archibaldo y consquistar sus moradas, con 3 artefactos" {
+      rolando.capacidadMochila(3)
+      rolando.recogerArtefacto(espadaDelDestino)
+      rolando.recogerArtefacto(armaduraDeAceroValyrio)
+      rolando.recogerArtefacto(collarDivino)
+      assert.equals(5+5+6+3, rolando.poderPelea())
+      rolando.puedeVencer(caterina)
+      rolando.puedeVencer(archibaldo)
+      rolando.puedeVencer(astra)
+      assert.equals([archibaldo,astra],rolando.enemigosAVencer())
+      assert.equals([palacioDeMarmol, torreDeMarfil], rolando.moradasConquistables())
+    }
+  }

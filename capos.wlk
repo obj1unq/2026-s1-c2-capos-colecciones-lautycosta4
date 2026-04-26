@@ -10,10 +10,6 @@ var capacidadMochila= 2
 
 var valorBasePelea= 5
 
-
-
-
-
 method valorBasePelea(_valorBasePelea){valorBasePelea=_valorBasePelea}
 method valorBasePelea(){return valorBasePelea}
 
@@ -69,5 +65,52 @@ method puedeLevantar(){
 method artefactoMasPoderosoDelCastilloActual(){
         return castilloActual.artefactoMasPoderoso(self)
 }
+//2.3
+/*Los enemigos en Erethia que Rolando puede vencer son aquellos que tienen un poder de batalla 
+menor al suyo. A su vez, las moradas que Rolando podría conquistar son las moradas de los enemigos
+a los cuales puede vencer.*/
+    const moradasConquistables=[]
+    
+    const enemigosAVencer=[]
+
+
+    method puedeVencer(enemigo){
+        if (self.poderPelea()>enemigo.poderPelea()){
+            enemigosAVencer.add(enemigo)
+            moradasConquistables.add(enemigo.castilloActual())
+        }
+    }
+
+    method enemigosAVencer() { return enemigosAVencer}
+
+    method moradasConquistables(){return moradasConquistables}
+
+
 }
+
+//Caterina tiene 28 de poder de pelea y vive en la fortaleza de acero
+object caterina {
+
+const castilloActual=fortalezaDeAcero
+method castilloActual(){return castilloActual}
+method poderPelea(){return 28}
+
+}
+
+//Archibaldo tiene 16 de poder de pelea y vive en el palacio de mármol. 
+object archibaldo {
+  const castilloActual=palacioDeMarmol
+method castilloActual(){return castilloActual}
+method poderPelea(){return 16}
+}
+
+//Astra tiene 14 de poder pelea y vive en la torre de marfil
+object astra {
+const castilloActual=torreDeMarfil
+method castilloActual(){return castilloActual}
+method poderPelea(){return 14}
+}
+
+
+
 

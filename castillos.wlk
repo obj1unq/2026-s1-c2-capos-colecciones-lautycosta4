@@ -23,3 +23,12 @@ object castillo2 {
     return artefactos
   }
 }
+object fortalezaDeAcero{
+  
+}
+object palacioDeMarmol{
+
+}
+object torreDeMarfil {
+  
+}

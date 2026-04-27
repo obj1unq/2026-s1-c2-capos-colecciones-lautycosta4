@@ -99,11 +99,24 @@ vencer a todos los enemigos.
         return self.poderPelea()>enemigo.poderPelea()
     }
 
-    method esPoderoso(){
+    method esPoderoso(){ return
         enemigos.size()>0 &&
         enemigos.all({enemigo=> self.puedeVencer(enemigo)})
     }
 
+//2.5
+    method poderPeleaCon(artefacto) {
+            return artefacto.poder(self)
+    }
+
+    method tieneArtefactoFatal(enemigo){return
+        mochila.any({artefacto => self.poderPeleaCon(artefacto)>enemigo.poderPelea()})
+    }
+    method artefactoFatalPara(enemigo){
+        if(self.tieneArtefactoFatal(enemigo)){ 
+         return   mochila.find({artefacto => self.poderPeleaCon(artefacto)>enemigo.poderPelea()})
+        }else self.error("no tiene artefacto fatal para este enemigo")
+ }
 }
 
 //Caterina tiene 28 de poder de pelea y vive en la fortaleza de acero

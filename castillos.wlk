@@ -22,6 +22,9 @@ object castillo2 {
   method inventario(){
     return artefactos
   }
+  method artefactoMasPoderoso(personaje){
+        return artefactos.max({artefacto=>artefacto.poder(personaje)})
+  }
 }
 object fortalezaDeAcero{
   

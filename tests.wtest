@@ -1,0 +1,102 @@
+import artefactos.*
+import capos.*
+import castillos.*
+describe "rolando recoleta artefactos" {
+  test "rolando recolecta artefacto (positivo)" {
+    rolando.capacidadMochila(2) // arrange/setup
+    rolando.recogerArtefacto(espadaDelDestino) //act/exercise
+    assert.equals(1, rolando.capacidadMochila()) // asserts
+    assert.equals(#{espadaDelDestino}, rolando.artefactosEnMochila())
+//assert.that(rolando.artefactosEnMochila().contains(espadaDelDestino))
+  }
+  test "rolando no recolecta artefacto (negativo)" {
+    rolando.capacidadMochila(0)
+    assert.throwsException({ rolando.recogerArtefacto(espadaDelDestino) })
+//  assert.equals(0, rolando.capacidadMochila()) 
+  }
+  }
+
+  describe "batallas" {
+    test "batalla con espada, armadura y collar. cambiando bases  " {
+      rolando.valorBasePelea(5)
+      rolando.capacidadMochila(3)
+      rolando.recogerArtefacto(espadaDelDestino)
+      rolando.recogerArtefacto(armaduraDeAceroValyrio)
+      rolando.recogerArtefacto(collarDivino)
+      assert.equals(5, rolando.valorBasePelea())
+      assert.equals(3, rolando.capacidadMochila())
+      assert.equals(5 + 5 + 6 + 3 , rolando.poderPelea())
+      rolando.batalla()
+      rolando.valorBasePelea(6)
+      assert.equals(6 + 3 + 6 + 3 , rolando.poderPelea())
+      rolando.batalla()
+      rolando.valorBasePelea(7)
+      assert.equals(7 + 3.5 + 6 + 5 , rolando.poderPelea())
+      rolando.batalla()
+      rolando.valorBasePelea(8)
+      assert.equals(8 + 4 + 6 + 6 , rolando.poderPelea())
+          }
+  
+ test "batalla con libro de hechizos" {
+      rolando.capacidadMochila(3)
+      rolando.recogerArtefacto(espadaDelDestino)
+      rolando.recogerArtefacto(armaduraDeAceroValyrio)
+      rolando.recogerArtefacto(collarDivino)
+      rolando.irACastillo()
+      rolando.recogerArtefacto(libroDeHechizos)
+      libroDeHechizos.guardarHechizo(bendicion)
+      libroDeHechizos.guardarHechizo(invisibilidad)
+      libroDeHechizos.guardarHechizo(invocacion)      
+      assert.equals(4, libroDeHechizos.poder(rolando))
+      rolando.batalla()
+      assert.equals(6, libroDeHechizos.poder(rolando))
+      rolando.batalla()
+      assert.equals(7, libroDeHechizos.poder(rolando))
+      rolando.batalla()
+      assert.equals(0, libroDeHechizos.poder(rolando))      
+    }
+  }
+
+  /*
+  Suponiendo que Rolando tiene 5 de base y capacidad de 3 artefactos. Entre sus artefactos 
+  se encuentran la *espada* (que le aporta 5), la *armadura* (aporta 6) y el *collar* (aporta 3). 
+  Su poder de batalla es 19, por lo tanto, puede vencer a Archibaldo y a Astra. 
+  Las moradas conquistables son el palacio de mármol y la torre de marfil.
+  */
+
+  describe "enemigos a vencer" {
+    test "rolando puede vencer a astra y archibaldo y consquistar sus moradas, con 3 artefactos" {
+      rolando.capacidadMochila(3)
+      rolando.recogerArtefacto(espadaDelDestino)
+      rolando.recogerArtefacto(armaduraDeAceroValyrio)
+      rolando.recogerArtefacto(collarDivino)
+      assert.equals(5+5+6+3, rolando.poderPelea())
+      rolando.puedeVencer(caterina)
+      rolando.puedeVencer(archibaldo)
+      rolando.puedeVencer(astra)
+      assert.equals([archibaldo,astra],rolando.enemigosAVencer())
+      assert.equals([palacioDeMarmol, torreDeMarfil], rolando.moradasConquistables())
+    }
+  }
+  describe "uso de artefacto fatal"{
+       test "rolando puede usar artefacto fatal contra astra "{
+      rolando.valorBasePelea(15)
+        assert.equals(15, rolando.valorBasePelea())
+        rolando.capacidadMochila(3)
+        rolando.recogerArtefacto(espadaDelDestino) 
+        rolando.recogerArtefacto(armaduraDeAceroValyrio) 
+        rolando.recogerArtefacto(collarDivino)
+      assert.that(rolando.tieneArtefactoFatal(astra))
+      assert.equals(espadaDelDestino, rolando.artefactoFatalPara(astra))
+    }
+    test "rolando no puede usar artefacto fatal contra caterina"{
+      rolando.valorBasePelea(15)
+        assert.equals(15, rolando.valorBasePelea())
+        rolando.capacidadMochila(3)
+        rolando.recogerArtefacto(espadaDelDestino) 
+        rolando.recogerArtefacto(armaduraDeAceroValyrio) 
+        rolando.recogerArtefacto(collarDivino)
+      assert.notThat(rolando.tieneArtefactoFatal(caterina))
+      assert.throwsException({rolando.artefactoFatalPara(caterina)}) 
+    }
+  }

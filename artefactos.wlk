@@ -47,7 +47,6 @@ object armaduraDeAceroValyrio{
     method usar(){
         poder     }
 
-    method poder(){return poder}
 
     method poder(personaje){return poder} 
 }
@@ -83,6 +82,6 @@ object invisibilidad {
 object invocacion {
     method poder(personaje){
         return 
-        personaje.artefactoMasPoderosoDelCastilloActual().poder(personaje)
+        personaje.poderDelArtefactoMasPoderosoDelCastilloActual()
     }
 }

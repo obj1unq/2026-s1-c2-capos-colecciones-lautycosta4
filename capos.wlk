@@ -42,9 +42,11 @@ method recogerArtefacto(artefacto){
     mochila.add(artefacto)
 }
 method puedeLevantar(){
-    if(mochila.size()==capacidadMochila)
-    {self.error("la mochila esta llena")
+    if(self.estaLlena())
+    {self.error("la mochila esta llena")}
 }
+method estaLlena() {
+    return mochila.size()==capacidadMochila
 }
 
  
@@ -59,9 +61,17 @@ method puedeLevantar(){
     
     method poderPelea(){return
     valorBasePelea + 
-    mochila.sum({artefacto=>artefacto.poder(self)})
+    self.poderTotalArtefactos()
+    }
+    method poderTotalArtefactos(){
+        return mochila.sum({artefacto=>artefacto.poder(self)})
     }
 
+
+
+method poderDelArtefactoMasPoderosoDelCastilloActual(){
+    return self.artefactoMasPoderosoDelCastilloActual().poder(self)
+}
 method artefactoMasPoderosoDelCastilloActual(){
         return castilloActual.artefactoMasPoderoso(self)
 }
@@ -99,9 +109,8 @@ vencer a todos los enemigos.
         return self.poderPelea()>enemigo.poderPelea()
     }
 
-    method esPoderoso(){ return
-        enemigos.size()>0 &&
-        enemigos.all({enemigo=> self.puedeVencer(enemigo)})
+    method esPoderoso(){ 
+      return  enemigos.all({enemigo=> self.puedeVencer(enemigo)})
     }
 
 //2.5
@@ -113,9 +122,8 @@ vencer a todos los enemigos.
         mochila.any({artefacto => self.poderPeleaCon(artefacto)>enemigo.poderPelea()})
     }
     method artefactoFatalPara(enemigo){
-        if(self.tieneArtefactoFatal(enemigo)){ 
-         return   mochila.find({artefacto => self.poderPeleaCon(artefacto)>enemigo.poderPelea()})
-        }else self.error("no tiene artefacto fatal para este enemigo")
+        return   
+    mochila.find({artefacto => self.poderPeleaCon(artefacto)>enemigo.poderPelea()})
  }
 }
 
